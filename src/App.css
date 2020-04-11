@@ -1,38 +1,253 @@
-.App {
-  text-align: center;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+html {
+    height: 100vh;
+}
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    height: 100vh;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+        monospace;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.container {
+    width: 85%;
+    margin: 0 auto;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* justify-content: space-around; */
+    text-align: center;
+    padding-bottom: 100px;
+    box-shadow: 0px 1px 20px -11px rgba(0, 0, 0, 0.75);
+    min-height: 400px;
 }
 
-.App-link {
-  color: #61dafb;
+.header {
+    height: 250px;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background: url('./images/map_illustration.png') center center/cover;
+    border-bottom: 3px solid #225fe0;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.header h1 {
+    position: absolute;
+    transform: translateY(10px);
+    font-size: 80px;
+    color: #fff;
+    text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.5);
+}
+
+.landing-text {
+    margin: 50px;
+    text-align: center;
+}
+
+.landing-text h3 {
+    font-size: 50px;
+    color: #2a99cc;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.landing-text p {
+    margin: auto;
+    width: 400px;
+}
+
+.mapContainer {
+    margin-bottom: 50px;
+}
+
+.marker-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    /* transform: translateY(-100%); */
+    transform: translateX(-50%);
+}
+
+.marker-btn img {
+    width: 20px;
+    height: 20px;
+}
+
+.marker-btn i {
+    font-size: 30px;
+    color: #f72222;
+    transform: translateY(-100%);
+}
+
+/* *Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px 0 5px;
+    border-bottom: 2.5px solid;
+    border-image: radial-gradient(white, #225fe0, white) 1;
+}
+
+.navbar a {
+    text-decoration: none;
+    margin: 20px;
+    color: #67b826;
+    font-weight: 600;
+    letter-spacing: 1px;
+    font-size: 17px;
+}
+
+/** ADD ALUMNI */
+.add-alumni-wrapper {
+    margin-top: 70px;
+    background-color: #ffffff;
+    box-shadow: 0px 1px 20px -11px rgba(0, 0, 0, 0.75);
+    width: 80%;
+    max-width: 1000px;
+}
+.add-alumni-form {
+    position: relative;
+    display: flex;
+    justify-content: start;
+    text-align: left;
+}
+
+.image {
+    width: 20%;
+    transform: translateX(30px);
+    /* transform: translateY(30px); */
+    height: inherit;
+    margin: 0;
+    background: url('./images/map-form.png') no-repeat center/cover;
+}
+
+.add-alumni-button {
+    display: inline-block;
+}
+
+.add-alumni-form img {
+    position: absolute;
+
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+
+.add-alumni-form label,
+input {
+    display: block;
+}
+
+.add-alumni-form label {
+    margin: 10px 0;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: #b31919;
+}
+
+.add-alumni-form input {
+    width: 200px;
+    height: 30px;
+}
+
+.alumni-form-group {
+    margin: 50px 20px;
+}
+
+.alumni-form-group input,
+textarea {
+    padding: 10px;
+}
+
+.react-geocoder-results {
+    /* border: 0.03em solid #acacac; */
+    letter-spacing: 1px;
+    box-shadow: 1px 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.react-geocoder-item {
+    padding: 5px 10px;
+    cursor: pointer;
+    background-color: #fff;
+}
+
+.react-geocoder-item h5 {
+    color: #b31919;
+}
+
+.react-geocoder-item p {
+    margin-top: 2px;
+    font-size: 14px;
+    color: rgb(97, 97, 97);
+}
+
+.react-geocoder-item:hover {
+    background-color: #f5f4f4;
+}
+
+/* *FOOTER */
+footer {
+    height: 70px;
+    padding: 30px 10%;
+    /* margin-top: 10%; */
+    transform: translateY(10px);
+    background-color: #555555;
+    border-top: 5px solid #3f3f3f;
+}
+
+footer p {
+    float: right;
+    font-size: 15px;
+    letter-spacing: 1px;
+    color: #ffffff;
+    font-weight: 400;
+    font-family: 'Oxanium', cursive;
+    transform: translateY(-10px);
+}
+
+/* *ALUMNI LIST */
+.alumni-list {
+    margin: 35px;
+}
+
+.alumni-list-item {
+    width: 400px;
+    margin: 25px;
+    font-size: 20px;
+    text-align: left;
+    border-bottom: 0.01em solid #b4b4b4;
+}
+
+.alumni-list-item h5 {
+    font-weight: 500;
+}
+.alumni-list-item span {
+    float: right;
+}
+
+.alumni-list-item a {
+    text-decoration: none;
+    color: #2a99cc;
+    padding-left: 10px;
+}
+
+.alumni-list-item a:hover {
+    color: #225fe0;
+}
+
+#first-row {
+    color: #b31919;
 }
