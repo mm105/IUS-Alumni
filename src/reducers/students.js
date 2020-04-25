@@ -2,6 +2,7 @@ import {
     IMPORT_STUDENTS_LOC,
     CLEAR_STUDENTS,
     GET_ALL_STUDENTS,
+    DELETE_STUDENT,
 } from '../actions/types';
 
 const initialState = {
@@ -25,6 +26,12 @@ export default function (state = initialState, action) {
                 ...state,
                 students: payload,
                 loading: false,
+            };
+        case DELETE_STUDENT:
+            return {
+                students: state.students.filter(
+                    (student) => student.studentId !== payload
+                ),
             };
         case CLEAR_STUDENTS:
             return {

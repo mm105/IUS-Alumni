@@ -1,10 +1,18 @@
 import React, { Fragment, useState } from 'react';
-import { Redirect, Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { login } from '../actions/auth';
+import { useEffect } from 'react';
 
 const Login = ({ auth, login }) => {
+    useEffect(() => {
+        document.querySelector('.content-wrap').style.paddingBottom = '0px';
+        return () => {
+            document.querySelector('.content-wrap').style.paddingBottom =
+                '200px';
+        };
+    }, []);
     const [formData, setFormData] = useState({
         email: '',
         password: '',
@@ -27,32 +35,37 @@ const Login = ({ auth, login }) => {
 
     return (
         <Fragment>
-            <div className="login-outer">
-                <div className="login">
-                    <form className="login-form" onSubmit={(e) => onSubmit(e)}>
-                        <br />
-                        <h3>Please login in</h3>
-                        <input
-                            type="email"
-                            placeholder="email"
-                            name="email"
-                            value={email}
-                            onChange={(e) => onChange(e)}
-                            required
-                        />
-                        <input
-                            type="password"
-                            placeholder="password"
-                            name="password"
-                            minLength="6"
-                            value={password}
-                            onChange={(e) => onChange(e)}
-                        />
-                        <button type="submit">Login</button>
-                    </form>
-                </div>
-                <div className="login-link">
-                    <Link to="/">Go to homepage</Link>
+            <div className="container-login">
+                <div className="square-one">
+                    <div className="square-two">
+                        <form
+                            onSubmit={(e) => onSubmit(e)}
+                            className="login-content"
+                        >
+                            <h3>Please enter your credentials!</h3>
+                            <input
+                                type="email"
+                                placeholder="email"
+                                name="email"
+                                value={email}
+                                onChange={(e) => onChange(e)}
+                                required
+                            />
+                            <input
+                                type="password"
+                                placeholder="password"
+                                name="password"
+                                minLength="6"
+                                value={password}
+                                onChange={(e) => onChange(e)}
+                            />
+                            <input
+                                type="submit"
+                                value="Login"
+                                className="submit-button"
+                            />
+                        </form>
+                    </div>
                 </div>
             </div>
         </Fragment>

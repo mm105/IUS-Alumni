@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 //actions
 import { getStudentsLocation, clearStudents } from '../actions/students';
 import { getStudentInfo, clearStudentInfo } from '../actions/studentInfo';
-
 const MapTest = ({
     students: { studentsLoc, loading },
     studentInfo: { studentInfo, infoLoading },
@@ -41,6 +40,7 @@ const MapTest = ({
                 mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_KEY}
                 mapStyle="mapbox://styles/mapbox/streets-v11"
                 onViewportChange={(viewport) => {
+                    // const { width, height, ...etc } = viewport;
                     setViewport(viewport);
                 }}
             >

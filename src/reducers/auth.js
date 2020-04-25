@@ -16,12 +16,12 @@ export default function (state = initialState, action) {
     const { type, payload } = action;
 
     switch (type) {
-        // case ADMIN_LOADED:
-        //     return {
-        //         ...state,
-        //         isAuthenticated: payload.isAuthenticated,
-        //         loading: false
-        //     };
+        case ADMIN_LOADED:
+            return {
+                ...state,
+                isAuthenticated: true,
+                loading: false,
+            };
         case LOGIN_SUCCESS:
             localStorage.setItem('token', payload.token);
             return {

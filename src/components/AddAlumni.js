@@ -5,13 +5,13 @@ import PropTypes from 'prop-types';
 
 //actions
 import { addAlumni, clearStudents } from '../actions/students';
+import { UPDATE_CITY_VALUE } from '../actions/types';
 
 //city search
 import Geocoder from 'react-mapbox-gl-geocoder';
 import InputComponent from './CitySearch/InputComponent';
 import ItemComponent from './CitySearch/ItemComponent';
 import { useEffect } from 'react';
-import studentInfo from '../reducers/studentInfo';
 
 const AddAlumni = ({ isAuthenticated, addAlumni, clearStudents }) => {
     useEffect(() => {
@@ -30,7 +30,7 @@ const AddAlumni = ({ isAuthenticated, addAlumni, clearStudents }) => {
     const [formData, setFormData] = useState({
         name: '',
         surname: '',
-        graduated: '6/2024',
+        graduated: '',
         description: '',
         location: {
             title: '',
@@ -50,11 +50,14 @@ const AddAlumni = ({ isAuthenticated, addAlumni, clearStudents }) => {
 
     const onSelectedCity = (viewport, item) => {
         console.log(item);
+
         const city = item.place_name.substr(0, item.place_name.indexOf(','));
         const country = item.place_name.substr(
             item.place_name.lastIndexOf(',') + 1
         );
+
         item.place_name = city + ',' + country;
+
         setFormData({
             ...formData,
             location: {
@@ -68,95 +71,117 @@ const AddAlumni = ({ isAuthenticated, addAlumni, clearStudents }) => {
 
     const onSubmitForm = (e) => {
         e.preventDefault();
-        if (!citySelected) {
-            alert('Please select a valid city!');
-        } else {
-            addAlumni(formData);
+        // if (!citySelected) {
+        //     alert('Please select a valid city!');
+        // } else {
+        addAlumni(formData);
 
-            //clear input fields
-            setFormData({
-                name: '',
-                surname: '',
-                graduated: '6/2024',
-                description: '',
-                location: {
-                    title: '',
-                    coordinates: [],
-                    type: 'Point',
-                },
-            });
-        }
+        //clear input fields
+        setFormData({
+            name: '',
+            surname: '',
+            graduated: '',
+            description: '',
+            location: {
+                title: '',
+                coordinates: [],
+                type: 'Point',
+            },
+        });
     };
 
     //Redirect if not logged in
-    if (!isAuthenticated) {
-        return <Redirect to="/login" />;
-    }
+    // if (!isAuthenticated) {
+    //     return <Redirect to="/login" />;
+    // }
     return (
         <Fragment>
-            <form
-                className="add-alumni-wrapper"
-                onSubmit={(e) => onSubmitForm(e)}
-                autoComplete="off"
-            >
-                <div className="add-alumni-form">
-                    <div className="alumni-form-group">
-                        <label htmlFor="">First name</label>
-                        <input
-                            type="text"
-                            name="name"
-                            id="name"
-                            value={name}
-                            onChange={(e) => onChange(e)}
-                            required
-                        />
-                        <label htmlFor="surname">Last name</label>
-                        <input
-                            type="text"
-                            name="surname"
-                            id="surname"
-                            value={surname}
-                            onChange={(e) => onChange(e)}
-                            required
-                        />
-                    </div>
-                    <div className="alumni-form-group">
-                        <label htmlFor="description">Description</label>
-                        <textarea
-                            name="description"
-                            id="description"
-                            cols="30"
-                            rows="10"
-                            value={description}
-                            onChange={(e) => onChange(e)}
-                            required
-                        ></textarea>
-                    </div>
-                    <div className="alumni-form-group">
-                        <label htmlFor="geocoder">City</label>
-                        <Geocoder
-                            mapboxApiAccessToken={
-                                process.env.REACT_APP_MAPBOX_KEY
-                            }
-                            inputComponent={InputComponent}
-                            itemComponent={ItemComponent}
-                            viewport={{}}
-                            updateInputOnSelect={true}
-                            onSelected={onSelectedCity}
-                            queryParams={queryParams}
-                            timeout={100}
-                            limit={4}
-                            id="gecoder"
-                            required
-                        />
-                    </div>
-                    <div className="image"></div>
-                </div>
+            <div className="fc add-wrap">
+                <h1 className="add-heading">Add Alumni</h1>
+                <div className="container fr">
+                    <div className="add-bottom fc">
+                        <form
+                            className="add-top fc"
+                            onSubmit={(e) => onSubmitForm(e)}
+                            autoComplete="off"
+                        >
+                            <div className="add-alumni-form">
+                                <div className="alumni-form-group">
+                                    <label htmlFor="">First name</label>
+                                    <input
+                                        type="text"
+                                        name="name"
+                                        id="name"
+                                        value={name}
+                                        onChange={(e) => onChange(e)}
+                                        placeholder="Name"
+                                        required
+                                    />
+                                    <label htmlFor="surname">Last name</label>
+                                    <input
+                                        type="text"
+                                        name="surname"
+                                        id="surname"
+                                        value={surname}
+                                        onChange={(e) => onChange(e)}
+                                        placeholder="Last name"
+                                        required
+                                    />
+                                </div>
+                                <div className="alumni-form-group">
+                                    <label htmlFor="description">
+                                        Description
+                                    </label>
+                                    <textarea
+                                        name="description"
+                                        id="description"
+                                        cols="30"
+                                        rows="5 "
+                                        value={description}
+                                        onChange={(e) => onChange(e)}
+                                        placeholder="Description"
+                                        required
+                                    ></textarea>
+                                </div>
+                                <div className="alumni-form-group">
+                                    <label htmlFor="graduated">
+                                        Graduate date
+                                    </label>
+                                    <input
+                                        type="text"
+                                        name="graduated"
+                                        id="graduated"
+                                        value={graduated}
+                                        onChange={(e) => onChange(e)}
+                                        placeholder="MM/YYYY"
+                                        required
+                                    />
+                                    <label htmlFor="geocoder">City</label>
+                                    <Geocoder
+                                        mapboxApiAccessToken={
+                                            process.env.REACT_APP_MAPBOX_KEY
+                                        }
+                                        inputComponent={InputComponent}
+                                        itemComponent={ItemComponent}
+                                        viewport={{}}
+                                        updateInputOnSelect={true}
+                                        onSelected={onSelectedCity}
+                                        queryParams={queryParams}
+                                        timeout={100}
+                                        limit={4}
+                                        id="gecoder"
+                                        required
+                                    />
+                                </div>
+                            </div>
 
-                <div className="add-alumni-button">
-                    <button type="submit">Add new alumni</button>
+                            <div className="add-alumni-button">
+                                <button type="submit">Add new alumni</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-            </form>
+            </div>
         </Fragment>
     );
 };

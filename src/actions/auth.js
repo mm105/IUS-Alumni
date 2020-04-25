@@ -7,26 +7,27 @@ import {
 } from './types';
 import axios from 'axios';
 
-// export const loadAdmin = () => async (dispatch) => {
-//     if (localStorage.token) {
-//         axios.defaults.headers.common['Authorization'] = localStorage.token;
-//     } else {
-//         delete axios.defaults.headers.common['Authorization'];
-//     }
+export const loadAdmin = () => async (dispatch) => {
+    if (localStorage.token) {
+        axios.defaults.headers.common['Authorization'] =
+            'Bearer ' + localStorage.token;
+    } else {
+        delete axios.defaults.headers.common['Authorization'];
+    }
 
-//     try {
-//         const res = await axios.get('/admin/load');
+    try {
+        const res = await axios.get('/admin/load');
 
-//         dispatch({
-//             type: ADMIN_LOADED,
-//             payload: res.data,
-//         });
-//     } catch (err) {
-//         dispatch({
-//             type: AUTH_ERROR,
-//         });
-//     }
-// };
+        dispatch({
+            type: ADMIN_LOADED,
+            payload: res.data,
+        });
+    } catch (err) {
+        dispatch({
+            type: AUTH_ERROR,
+        });
+    }
+};
 
 export const login = (email, password) => async (dispatch) => {
     try {

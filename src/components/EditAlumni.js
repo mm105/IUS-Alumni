@@ -58,7 +58,7 @@ const EditAlumni = ({
     const [formData, setFormData] = useState({
         name: '',
         surname: '',
-        graduated: '6/2024',
+        graduated: '',
         description: '',
         location: {
             title: '',
@@ -67,7 +67,7 @@ const EditAlumni = ({
         },
     });
 
-    const { name, surname, description, location } = formData;
+    const { name, surname, description, graduated } = formData;
 
     const onChange = (e) => {
         setFormData({
@@ -109,65 +109,97 @@ const EditAlumni = ({
                 <h5>Loading data...</h5>
             ) : (
                 <Fragment>
-                    <form
-                        className="add-alumni-form"
-                        onSubmit={(e) => onSubmitForm(e)}
-                        autoComplete="off"
-                    >
-                        <div className="alumni-form-group">
-                            <label htmlFor="">First name</label>
-                            <input
-                                type="text"
-                                name="name"
-                                id="name"
-                                value={name}
-                                onChange={(e) => onChange(e)}
-                                required
-                            />
-                            <label htmlFor="surname">Last name</label>
-                            <input
-                                type="text"
-                                name="surname"
-                                id="surname"
-                                value={surname}
-                                onChange={(e) => onChange(e)}
-                                required
-                            />
+                    <div className="fc add-wrap">
+                        <h1 className="add-heading">Add Alumni</h1>
+                        <div className="container fr">
+                            <div className="add-bottom fc">
+                                <form
+                                    className="add-top fc"
+                                    onSubmit={(e) => onSubmitForm(e)}
+                                    autoComplete="off"
+                                >
+                                    <div className="add-alumni-form">
+                                        <div className="alumni-form-group">
+                                            <label htmlFor="">First name</label>
+                                            <input
+                                                type="text"
+                                                name="name"
+                                                id="name"
+                                                value={name}
+                                                onChange={(e) => onChange(e)}
+                                                placeholder="Name"
+                                                required
+                                            />
+                                            <label htmlFor="surname">
+                                                Last name
+                                            </label>
+                                            <input
+                                                type="text"
+                                                name="surname"
+                                                id="surname"
+                                                value={surname}
+                                                onChange={(e) => onChange(e)}
+                                                placeholder="Last name"
+                                                required
+                                            />
+                                        </div>
+                                        <div className="alumni-form-group">
+                                            <label htmlFor="description">
+                                                Description
+                                            </label>
+                                            <textarea
+                                                name="description"
+                                                id="description"
+                                                cols="30"
+                                                rows="5 "
+                                                value={description}
+                                                onChange={(e) => onChange(e)}
+                                                placeholder="Description"
+                                                required
+                                            ></textarea>
+                                        </div>
+                                        <div className="alumni-form-group">
+                                            <label htmlFor="graduated">
+                                                Graduate date
+                                            </label>
+                                            <input
+                                                type="text"
+                                                name="graduated"
+                                                id="graduated"
+                                                value={graduated}
+                                                onChange={(e) => onChange(e)}
+                                                placeholder="MM/YYYY"
+                                                required
+                                            />
+                                            <label htmlFor="geocoder">
+                                                City
+                                            </label>
+                                            <Geocoder
+                                                mapboxApiAccessToken={
+                                                    process.env
+                                                        .REACT_APP_MAPBOX_KEY
+                                                }
+                                                inputComponent={InputComponent}
+                                                itemComponent={ItemComponent}
+                                                viewport={{}}
+                                                updateInputOnSelect={true}
+                                                onSelected={onSelectedCity}
+                                                queryParams={queryParams}
+                                                timeout={100}
+                                                limit={4}
+                                                id="gecoder"
+                                                required
+                                            />
+                                        </div>
+                                    </div>
+
+                                    <div className="add-alumni-button">
+                                        <button type="submit">Edit</button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
-                        <div className="alumni-form-group">
-                            <label htmlFor="description">Description</label>
-                            <textarea
-                                name="description"
-                                id="description"
-                                cols="30"
-                                rows="10"
-                                value={description}
-                                onChange={(e) => onChange(e)}
-                                required
-                            ></textarea>
-                        </div>
-                        <div className="alumni-form-group">
-                            <label htmlFor="geocoder">City</label>
-                            <Geocoder
-                                mapboxApiAccessToken={
-                                    process.env.REACT_APP_MAPBOX_KEY
-                                }
-                                inputComponent={InputComponent}
-                                itemComponent={ItemComponent}
-                                viewport={{}}
-                                updateInputOnSelect={true}
-                                onSelected={onSelectedCity}
-                                queryParams={queryParams}
-                                initialInputValue={location.title}
-                                timeout={100}
-                                limit={4}
-                                id="gecoder"
-                                required
-                            />
-                        </div>
-                        <div className="image"></div>
-                        <button type="submit">Edit alumni</button>
-                    </form>
+                    </div>
                 </Fragment>
             )}
         </Fragment>

@@ -3,7 +3,11 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 //actions
-import { getAllStudents, clearStudents } from '../actions/students';
+import {
+    getAllStudents,
+    clearStudents,
+    deleteStudent,
+} from '../actions/students';
 import { Link } from 'react-router-dom';
 
 const AlumniList = ({
@@ -11,6 +15,7 @@ const AlumniList = ({
     getAllStudents,
     clearStudents,
     isAuthenticated,
+    deleteStudent,
 }) => {
     //
     useEffect(() => {
@@ -18,7 +23,7 @@ const AlumniList = ({
         return () => {
             clearStudents();
         };
-    }, []);
+    }, [getAllStudents]);
 
     return (
         <Fragment>
@@ -26,33 +31,47 @@ const AlumniList = ({
                 <h5>Loading..</h5>
             ) : (
                 <Fragment>
-                    <div className="alumni-list">
-                        <div className="alumni-list-item">
-                            <h5 id="first-row">
-                                Alumni <span>Graduated date</span>
-                            </h5>
+                    <div className="list-wrap ">
+                        <h1 className="add-heading">Alumni List</h1>
+                        <div className="alumni-list fc">
+                            <div className="alumni-list-item">
+                                <h5 id="first-row">
+                                    Alumni <span>Graduated date</span>
+                                </h5>
+                            </div>
+                            {students.map((student) => (
+                                <Fragment key={student.studentId}>
+                                    <div className="alumni-list-item">
+                                        <h5>
+                                            {student.name} {student.surname}
+                                            <span>
+                                                {student.graduated}{' '}
+                                                {isAuthenticated ? (
+                                                    <Fragment>
+                                                        <Link
+                                                            to={`/edit-alumni/${student.studentId}`}
+                                                        >
+                                                            Edit
+                                                        </Link>
+                                                        <button
+                                                            onClick={() => {
+                                                                deleteStudent(
+                                                                    student.studentId
+                                                                );
+                                                            }}
+                                                        >
+                                                            Delete
+                                                        </button>
+                                                    </Fragment>
+                                                ) : (
+                                                    ''
+                                                )}
+                                            </span>
+                                        </h5>
+                                    </div>
+                                </Fragment>
+                            ))}
                         </div>
-                        {students.map((student) => (
-                            <Fragment key={student.studentId}>
-                                <div className="alumni-list-item">
-                                    <h5>
-                                        {student.name} {student.surname}
-                                        <span>
-                                            {student.graduated}{' '}
-                                            {isAuthenticated ? (
-                                                <Link
-                                                    to={`/edit-alumni/${student.studentId}`}
-                                                >
-                                                    Edit
-                                                </Link>
-                                            ) : (
-                                                ''
-                                            )}
-                                        </span>
-                                    </h5>
-                                </div>
-                            </Fragment>
-                        ))}
                     </div>
                 </Fragment>
             )}
@@ -63,6 +82,7 @@ const AlumniList = ({
 AlumniList.propTypes = {
     getAllStudents: PropTypes.func.isRequired,
     clearStudents: PropTypes.func.isRequired,
+    deleteStudent: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -73,6 +93,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
     getAllStudents,
     clearStudents,
+    deleteStudent,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AlumniList);

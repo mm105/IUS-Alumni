@@ -1,4 +1,9 @@
-import { IMPORT_STUDENTS_LOC, CLEAR_STUDENTS, GET_ALL_STUDENTS } from './types';
+import {
+    IMPORT_STUDENTS_LOC,
+    CLEAR_STUDENTS,
+    GET_ALL_STUDENTS,
+    DELETE_STUDENT,
+} from './types';
 import axios from 'axios';
 
 //get students location
@@ -22,6 +27,8 @@ export const addAlumni = (data) => async (dispatch) => {
             Authorization: 'Bearer ' + localStorage.getItem('token'),
         },
     };
+    console.log(data);
+
     try {
         const res = await axios.post('/admin/add-student', data, config);
         console.log(res);
@@ -45,12 +52,42 @@ export const editAlumni = (data) => async (dispatch) => {
     }
 };
 
+export const deleteStudent = (studentId) => async (dispatch) => {
+    if (
+        window.confirm(
+            'Are you sure you want to delete this alumnus/alumna? This action cannot be undone!'
+        )
+    ) {
+        const config = {
+            headers: {
+                Authorization: 'Bearer ' + localStorage.getItem('token'),
+            },
+        };
+        console.log(studentId);
+
+        try {
+            const res = await axios.post(
+                '/admin/delete-student',
+                { studentId },
+                config
+            );
+
+            console.log(res.data);
+
+            dispatch({
+                type: DELETE_STUDENT,
+                payload: studentId,
+            });
+        } catch (err) {
+            console.log(err.response);
+        }
+    }
+};
+
 //get all alumni
 export const getAllStudents = () => async (dispatch) => {
     try {
         const res = await axios.get('/students');
-
-        console.log(res.data);
 
         dispatch({
             type: GET_ALL_STUDENTS,
