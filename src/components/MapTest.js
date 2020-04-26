@@ -20,7 +20,7 @@ const MapTest = ({
             clearStudentInfo();
             clearStudents();
         };
-    }, []);
+    }, [getStudentsLocation, clearStudentInfo, clearStudents]);
 
     const [viewport, setViewport] = useState({
         lng: 1,

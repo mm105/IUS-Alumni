@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 
 //actions
 import { addAlumni, clearStudents } from '../actions/students';
-import { UPDATE_CITY_VALUE } from '../actions/types';
 
 //city search
 import Geocoder from 'react-mapbox-gl-geocoder';
@@ -18,7 +17,7 @@ const AddAlumni = ({ isAuthenticated, addAlumni, clearStudents }) => {
         return () => {
             clearStudents();
         };
-    }, []);
+    }, [clearStudents]);
 
     const [queryParams, setQueryParams] = useState({
         types: 'place',
@@ -39,7 +38,7 @@ const AddAlumni = ({ isAuthenticated, addAlumni, clearStudents }) => {
         },
     });
 
-    const { name, surname, graduated, description, location } = formData;
+    const { name, surname, graduated, description } = formData;
 
     const onChange = (e) => {
         setFormData({
@@ -71,29 +70,30 @@ const AddAlumni = ({ isAuthenticated, addAlumni, clearStudents }) => {
 
     const onSubmitForm = (e) => {
         e.preventDefault();
-        // if (!citySelected) {
-        //     alert('Please select a valid city!');
-        // } else {
-        addAlumni(formData);
+        if (!citySelected) {
+            alert('Please select a valid city!');
+        } else {
+            addAlumni(formData);
 
-        //clear input fields
-        setFormData({
-            name: '',
-            surname: '',
-            graduated: '',
-            description: '',
-            location: {
-                title: '',
-                coordinates: [],
-                type: 'Point',
-            },
-        });
+            //clear input fields
+            setFormData({
+                name: '',
+                surname: '',
+                graduated: '',
+                description: '',
+                location: {
+                    title: '',
+                    coordinates: [],
+                    type: 'Point',
+                },
+            });
+        }
     };
 
-    //Redirect if not logged in
-    // if (!isAuthenticated) {
-    //     return <Redirect to="/login" />;
-    // }
+    // Redirect if not logged in
+    if (!isAuthenticated) {
+        return <Redirect to="/login" />;
+    }
     return (
         <Fragment>
             <div className="fc add-wrap">

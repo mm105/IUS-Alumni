@@ -51,7 +51,7 @@ const Navbar = ({ logout, isAuthenticated, location }) => {
                                 <Link to="/add-alumni">Add alumni</Link>
                             </li>
                             <li>
-                                <Link to="">Settings</Link>
+                                <Link to="/settings">Settings</Link>
                             </li>
                             <li>
                                 <Link to="" onClick={logout}>

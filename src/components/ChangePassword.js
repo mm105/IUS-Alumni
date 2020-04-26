@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react';
-import { Redirect, Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { changePassword } from '../actions/auth';
@@ -22,51 +22,52 @@ const ChangePassword = ({ changePassword, isAuthenticated }) => {
         changePassword(formData);
     };
 
-    //Redirect if not logged in
-    if (!isAuthenticated) {
-        return <Redirect to="/login" />;
-    }
+    // //Redirect if not logged in
+    // if (!isAuthenticated) {
+    //     return <Redirect to="/login" />;
+    // }
 
     return (
         <Fragment>
-            <div className="login-outer">
-                <div className="login">
-                    <form className="login-form" onSubmit={(e) => onSubmit(e)}>
-                        <br />
+            <div className="square-one sq-one-chg">
+                <div className="square-two">
+                    <form
+                        className="login-content"
+                        onSubmit={(e) => onSubmit(e)}
+                        autoComplete="off"
+                    >
                         <h3>Change your password</h3>
                         <input
-                            type="email"
-                            placeholder="email"
-                            name="email"
-                            value={email}
+                            type="password"
+                            placeholder="Old password"
+                            name="password"
+                            minLength="6"
+                            value={password}
                             onChange={(e) => onChange(e)}
                             required
                         />
                         <input
                             type="password"
-                            placeholder="password"
-                            name="password"
-                            minLength="6"
-                            value={password}
-                            onChange={(e) => onChange(e)}
-                        />
-                        <input
-                            type="password"
-                            placeholder="newPassword"
+                            placeholder="New password"
                             name="newPassword"
                             minLength="6"
                             value={newPassword}
                             onChange={(e) => onChange(e)}
+                            required
                         />
                         <input
                             type="password"
-                            placeholder="newPasswordConfirm"
+                            placeholder="Confirm new password"
                             name="newPasswordConfirm"
                             minLength="6"
                             value={newPasswordConfirm}
                             onChange={(e) => onChange(e)}
+                            required
                         />
-                        <button type="submit">Change password</button>
+
+                        <button type="submit" className="submit-btn">
+                            Change password
+                        </button>
                     </form>
                 </div>
             </div>

@@ -12,6 +12,7 @@ import Geocoder from 'react-mapbox-gl-geocoder';
 import InputComponent from './CitySearch/InputComponent';
 import ItemComponent from './CitySearch/ItemComponent';
 import { useEffect } from 'react';
+import Spinner from './Spinner';
 
 const EditAlumni = ({
     //props
@@ -31,7 +32,7 @@ const EditAlumni = ({
             clearStudentInfo();
             clearStudents();
         };
-    }, []);
+    }, [getStudentInfo, clearStudentInfo, clearStudents, match.params.id]);
 
     useEffect(() => {
         setFormData({
@@ -48,7 +49,7 @@ const EditAlumni = ({
                 type: infoLoading ? '' : studentInfo.location.type,
             },
         });
-    }, [infoLoading, studentInfo]);
+    }, [infoLoading, studentInfo, match.params.id]);
 
     const [queryParams, setQueryParams] = useState({
         types: 'place',
@@ -106,7 +107,7 @@ const EditAlumni = ({
     return (
         <Fragment>
             {infoLoading ? (
-                <h5>Loading data...</h5>
+                <Spinner />
             ) : (
                 <Fragment>
                     <div className="fc add-wrap">

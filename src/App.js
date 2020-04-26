@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect } from 'react';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import axios from 'axios';
 import './App.css';
 
@@ -16,8 +16,8 @@ import AddAlumni from './components/AddAlumni';
 import EditAlumni from './components/EditAlumni';
 import Navbar from './components/Navbar';
 import Login from './components/Login';
-import ChangePassword from './components/ChangePassword';
 import AlumniList from './components/AlumniList';
+import Settings from './components/Settings';
 
 //axios
 axios.defaults.baseURL =
@@ -61,10 +61,10 @@ function App() {
                                     component={AlumniList}
                                 />
                                 <Route exact path="/login" component={Login} />
-                                <PrivateRoute
+                                <Route
                                     exact
-                                    path="/change-pass"
-                                    component={ChangePassword}
+                                    path="/settings"
+                                    component={Settings}
                                 />
                             </Switch>
                         </div>

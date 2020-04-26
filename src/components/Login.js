@@ -62,7 +62,7 @@ const Login = ({ auth, login }) => {
                             <input
                                 type="submit"
                                 value="Login"
-                                className="submit-button"
+                                className="submit-btn"
                             />
                         </form>
                     </div>
