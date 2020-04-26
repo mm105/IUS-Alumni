@@ -178,7 +178,11 @@ ul {
 .main-nav.scrolling-active ul li a:hover {
     color: #207ce5;
 }
-/* *HEADER */
+
+.hide-nav {
+    display: none;
+}
+/* *LANDING*/
 
 .header {
     height: 100vh;
@@ -339,11 +343,26 @@ ul {
     margin: 10px;
 }
 
-.options span {
+.lndg-swtch-btn {
+    border: none;
+    background-color: transparent;
+    letter-spacing: 2px;
+    font-weight: 400;
+    font-size: 15px;
+    color: #9b9b9b;
+    cursor: pointer;
+}
+
+.lndg-swtch-btn:focus {
+    outline: none;
+}
+
+.swtch-clicked {
     color: #207ce5;
     font-weight: 600;
 }
 
+/* for filter icon */
 .test {
     font-weight: 300;
     padding-top: 2px;

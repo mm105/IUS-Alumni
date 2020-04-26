@@ -16,7 +16,7 @@ import AddAlumni from './components/AddAlumni';
 import EditAlumni from './components/EditAlumni';
 import Navbar from './components/Navbar';
 import Login from './components/Login';
-import AlumniList from './components/AlumniList';
+import AlumniListAdmin from './components/AlumniListAdmin';
 import Settings from './components/Settings';
 
 //axios
@@ -45,23 +45,23 @@ function App() {
 
                             <Switch>
                                 <Route exact path="/" component={Landing} />
-                                <Route
+                                <PrivateRoute
                                     exact
                                     path="/add-alumni"
                                     component={AddAlumni}
                                 />
-                                <Route
+                                <PrivateRoute
                                     exact
                                     path="/edit-alumni/:id"
                                     component={EditAlumni}
                                 />
-                                <Route
+                                <PrivateRoute
                                     exact
                                     path="/alumni-list"
-                                    component={AlumniList}
+                                    component={AlumniListAdmin}
                                 />
                                 <Route exact path="/login" component={Login} />
-                                <Route
+                                <PrivateRoute
                                     exact
                                     path="/settings"
                                     component={Settings}

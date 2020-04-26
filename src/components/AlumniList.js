@@ -28,68 +28,54 @@ const AlumniList = ({
 
     return (
         <Fragment>
-            {loading ? (
-                <Spinner />
-            ) : (
-                <Fragment>
-                    <div className="list-wrap ">
-                        <h1 className="add-heading">Alumni List</h1>
-                        <div className="alumni-list fc">
-                            <div className="border-bottom">
-                                <div className="border-top">
-                                    <div className="alumni-list-item">
-                                        <h5 id="first-row">
-                                            Alumni{' '}
-                                            <span
-                                                id={
-                                                    isAuthenticated
-                                                        ? 'graduated-mrg'
-                                                        : ''
-                                                }
-                                            >
-                                                Graduated date
-                                            </span>
-                                        </h5>
-                                    </div>
-                                    {students.map((student) => (
-                                        <Fragment key={student.studentId}>
-                                            <div className="alumni-list-item">
-                                                <h5>
-                                                    {student.name}{' '}
-                                                    {student.surname}
-                                                    <span>
-                                                        {student.graduated}{' '}
-                                                        {isAuthenticated ? (
-                                                            <Fragment>
-                                                                <Link
-                                                                    to={`/edit-alumni/${student.studentId}`}
-                                                                >
-                                                                    Edit
-                                                                </Link>
-                                                                <button
-                                                                    onClick={() => {
-                                                                        deleteStudent(
-                                                                            student.studentId
-                                                                        );
-                                                                    }}
-                                                                >
-                                                                    Delete
-                                                                </button>
-                                                            </Fragment>
-                                                        ) : (
-                                                            ''
-                                                        )}
-                                                    </span>
-                                                </h5>
-                                            </div>
-                                        </Fragment>
-                                    ))}
-                                </div>
-                            </div>
+            <div className="alumni-list fc">
+                <div className="border-bottom">
+                    <div className="border-top">
+                        <div className="alumni-list-item">
+                            <h5 id="first-row">
+                                Alumni{' '}
+                                <span
+                                    id={isAuthenticated ? 'graduated-mrg' : ''}
+                                >
+                                    Graduated date
+                                </span>
+                            </h5>
                         </div>
+                        {students.map((student) => (
+                            <Fragment key={student.studentId}>
+                                <div className="alumni-list-item">
+                                    <h5>
+                                        {student.name} {student.surname}
+                                        <span>
+                                            {student.graduated}{' '}
+                                            {isAuthenticated ? (
+                                                <Fragment>
+                                                    <Link
+                                                        to={`/edit-alumni/${student.studentId}`}
+                                                    >
+                                                        Edit
+                                                    </Link>
+                                                    <button
+                                                        onClick={() => {
+                                                            deleteStudent(
+                                                                student.studentId
+                                                            );
+                                                        }}
+                                                    >
+                                                        Delete
+                                                    </button>
+                                                </Fragment>
+                                            ) : (
+                                                ''
+                                            )}
+                                        </span>
+                                    </h5>
+                                </div>
+                            </Fragment>
+                        ))}
                     </div>
-                </Fragment>
-            )}
+                </div>
+            </div>
         </Fragment>
     );
 };

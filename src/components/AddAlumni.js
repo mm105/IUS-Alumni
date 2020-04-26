@@ -11,13 +11,17 @@ import Geocoder from 'react-mapbox-gl-geocoder';
 import InputComponent from './CitySearch/InputComponent';
 import ItemComponent from './CitySearch/ItemComponent';
 import { useEffect } from 'react';
+import Spinner from './Spinner';
 
-const AddAlumni = ({ isAuthenticated, addAlumni, clearStudents }) => {
+const AddAlumni = ({ isAuthenticated, addAlumni, clearStudents, loading }) => {
     useEffect(() => {
+        setload(false);
         return () => {
             clearStudents();
         };
     }, [clearStudents]);
+
+    const [load, setload] = useState(true);
 
     const [queryParams, setQueryParams] = useState({
         types: 'place',
@@ -90,98 +94,111 @@ const AddAlumni = ({ isAuthenticated, addAlumni, clearStudents }) => {
         }
     };
 
-    // Redirect if not logged in
-    if (!isAuthenticated) {
-        return <Redirect to="/login" />;
-    }
+    // // Redirect if not logged in
+    // if (!isAuthenticated) {
+    //     return <Redirect to="/login" />;
+    // }
     return (
         <Fragment>
-            <div className="fc add-wrap">
-                <h1 className="add-heading">Add Alumni</h1>
-                <div className="container fr">
-                    <div className="add-bottom fc">
-                        <form
-                            className="add-top fc"
-                            onSubmit={(e) => onSubmitForm(e)}
-                            autoComplete="off"
-                        >
-                            <div className="add-alumni-form">
-                                <div className="alumni-form-group">
-                                    <label htmlFor="">First name</label>
-                                    <input
-                                        type="text"
-                                        name="name"
-                                        id="name"
-                                        value={name}
-                                        onChange={(e) => onChange(e)}
-                                        placeholder="Name"
-                                        required
-                                    />
-                                    <label htmlFor="surname">Last name</label>
-                                    <input
-                                        type="text"
-                                        name="surname"
-                                        id="surname"
-                                        value={surname}
-                                        onChange={(e) => onChange(e)}
-                                        placeholder="Last name"
-                                        required
-                                    />
-                                </div>
-                                <div className="alumni-form-group">
-                                    <label htmlFor="description">
-                                        Description
-                                    </label>
-                                    <textarea
-                                        name="description"
-                                        id="description"
-                                        cols="30"
-                                        rows="5 "
-                                        value={description}
-                                        onChange={(e) => onChange(e)}
-                                        placeholder="Description"
-                                        required
-                                    ></textarea>
-                                </div>
-                                <div className="alumni-form-group">
-                                    <label htmlFor="graduated">
-                                        Graduate date
-                                    </label>
-                                    <input
-                                        type="text"
-                                        name="graduated"
-                                        id="graduated"
-                                        value={graduated}
-                                        onChange={(e) => onChange(e)}
-                                        placeholder="MM/YYYY"
-                                        required
-                                    />
-                                    <label htmlFor="geocoder">City</label>
-                                    <Geocoder
-                                        mapboxApiAccessToken={
-                                            process.env.REACT_APP_MAPBOX_KEY
-                                        }
-                                        inputComponent={InputComponent}
-                                        itemComponent={ItemComponent}
-                                        viewport={{}}
-                                        updateInputOnSelect={true}
-                                        onSelected={onSelectedCity}
-                                        queryParams={queryParams}
-                                        timeout={100}
-                                        limit={4}
-                                        id="gecoder"
-                                        required
-                                    />
-                                </div>
-                            </div>
+            {load ? (
+                <Spinner />
+            ) : (
+                <Fragment>
+                    <div className="fc add-wrap">
+                        <h1 className="add-heading">Add Alumni</h1>
+                        <div className="container fr">
+                            <div className="add-bottom fc">
+                                <form
+                                    className="add-top fc"
+                                    onSubmit={(e) => onSubmitForm(e)}
+                                    autoComplete="off"
+                                >
+                                    <div className="add-alumni-form">
+                                        <div className="alumni-form-group">
+                                            <label htmlFor="">First name</label>
+                                            <input
+                                                type="text"
+                                                name="name"
+                                                id="name"
+                                                value={name}
+                                                onChange={(e) => onChange(e)}
+                                                placeholder="Name"
+                                                required
+                                            />
+                                            <label htmlFor="surname">
+                                                Last name
+                                            </label>
+                                            <input
+                                                type="text"
+                                                name="surname"
+                                                id="surname"
+                                                value={surname}
+                                                onChange={(e) => onChange(e)}
+                                                placeholder="Last name"
+                                                required
+                                            />
+                                        </div>
+                                        <div className="alumni-form-group">
+                                            <label htmlFor="description">
+                                                Description
+                                            </label>
+                                            <textarea
+                                                name="description"
+                                                id="description"
+                                                cols="30"
+                                                rows="5 "
+                                                value={description}
+                                                onChange={(e) => onChange(e)}
+                                                placeholder="Description"
+                                                required
+                                            ></textarea>
+                                        </div>
+                                        <div className="alumni-form-group">
+                                            <label htmlFor="graduated">
+                                                Graduate date
+                                            </label>
+                                            <input
+                                                type="text"
+                                                name="graduated"
+                                                id="graduated"
+                                                value={graduated}
+                                                onChange={(e) => onChange(e)}
+                                                placeholder="MM/YYYY"
+                                                required
+                                            />
+                                            <label htmlFor="geocoder">
+                                                City
+                                            </label>
+                                            <Geocoder
+                                                mapboxApiAccessToken={
+                                                    process.env
+                                                        .REACT_APP_MAPBOX_KEY
+                                                }
+                                                inputComponent={InputComponent}
+                                                itemComponent={ItemComponent}
+                                                viewport={{}}
+                                                updateInputOnSelect={true}
+                                                onSelected={onSelectedCity}
+                                                queryParams={queryParams}
+                                                timeout={100}
+                                                limit={4}
+                                                id="gecoder"
+                                                required
+                                            />
+                                        </div>
+                                    </div>
 
-                            <div className="add-alumni-button">
-                                <button type="submit">Add new alumni</button>
+                                    <div className="add-alumni-button">
+                                        <button type="submit">
+                                            Add new alumni
+                                        </button>
+                                    </div>
+                                </form>
                             </div>
-                        </form>
+                        </div>
                     </div>
-                </div>
-            </div>
+                </Fragment>
+            )}
         </Fragment>
     );
 };
@@ -194,6 +211,7 @@ AddAlumni.propTypes = {
 
 const mapStateToProps = (state) => ({
     isAuthenticated: state.auth.isAuthenticated,
+    loading: state.students.loading,
 });
 
 const mapDispatchToProps = {

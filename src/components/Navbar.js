@@ -18,7 +18,6 @@ const Navbar = ({ logout, isAuthenticated, location }) => {
                 nav.classList.remove('scrolling-active');
                 // console.log('remove in 1');
             }
-
             window.addEventListener('scroll', () => {
                 if (nav !== null) {
                     if (location.pathname === '/' && window.scrollY > 100) {

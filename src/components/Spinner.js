@@ -2,20 +2,40 @@ import React, { Fragment, useEffect } from 'react';
 import spinner from '../images/spinner.gif';
 
 const Spinner = () => {
-    useEffect(() => {
-        const footer = document.querySelector('.footer');
-        const content_wrap = document.querySelector('.content-wrap');
-        // const page_container = document.querySelector('.page-container');
-        footer.style.display = 'none';
-        content_wrap.style.paddingBottom = '0';
+    const footer = document.querySelector('.footer');
+    const content_wrap = document.querySelector('.content-wrap');
+    const nav = document.querySelector('nav');
 
-        // page_container.style.minHeight = '0';
+    useEffect(() => {
+        console.log(nav);
+
+        if (nav !== null) {
+            nav.classList.add('hide-nav');
+            console.log('hh');
+        }
+
+        if (footer !== null) {
+            footer.style.display = 'none';
+        }
+
+        if (content_wrap !== null) {
+            content_wrap.style.paddingBottom = '0';
+        }
+
         return () => {
-            footer.style.display = 'block';
-            content_wrap.style.paddingBottom = '200px';
-            // page_container.style.minHeight = '100vh';
+            if (nav !== null) {
+                nav.classList.remove('hide-nav');
+            }
+
+            if (footer !== null) {
+                footer.style.display = 'block';
+            }
+
+            if (content_wrap !== null) {
+                content_wrap.style.paddingBottom = '200px';
+            }
         };
-    }, []);
+    }, [footer, content_wrap, nav]);
     return (
         <Fragment>
             <div className="fc spinner">

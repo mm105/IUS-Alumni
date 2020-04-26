@@ -6,13 +6,12 @@ import { changePassword } from '../actions/auth';
 
 const ChangePassword = ({ changePassword, isAuthenticated }) => {
     const [formData, setFormData] = useState({
-        email: '',
         password: '',
         newPassword: '',
         newPasswordConfirm: '',
     });
 
-    const { email, password, newPassword, newPasswordConfirm } = formData;
+    const { password, newPassword, newPasswordConfirm } = formData;
 
     const onChange = (e) =>
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -20,6 +19,12 @@ const ChangePassword = ({ changePassword, isAuthenticated }) => {
     const onSubmit = async (e) => {
         e.preventDefault();
         changePassword(formData);
+
+        setFormData({
+            password: '',
+            newPassword: '',
+            newPasswordConfirm: '',
+        });
     };
 
     // //Redirect if not logged in
@@ -76,7 +81,6 @@ const ChangePassword = ({ changePassword, isAuthenticated }) => {
 };
 
 ChangePassword.propTypes = {
-    isAuthenticated: PropTypes.object.isRequired,
     changePassword: PropTypes.func.isRequired,
 };
 
