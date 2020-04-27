@@ -101,9 +101,9 @@ const EditAlumni = ({
     };
 
     //Redirect if not logged in
-    if (!isAuthenticated) {
-        return <Redirect to="/login" />;
-    }
+    // if (!isAuthenticated) {
+    //     return <Redirect to="/login" />;
+    // }
     return (
         <Fragment>
             {infoLoading ? (

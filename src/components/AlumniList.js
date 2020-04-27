@@ -28,54 +28,64 @@ const AlumniList = ({
 
     return (
         <Fragment>
-            <div className="alumni-list fc">
-                <div className="border-bottom">
-                    <div className="border-top">
-                        <div className="alumni-list-item">
-                            <h5 id="first-row">
-                                Alumni{' '}
-                                <span
-                                    id={isAuthenticated ? 'graduated-mrg' : ''}
-                                >
-                                    Graduated date
-                                </span>
-                            </h5>
-                        </div>
-                        {students.map((student) => (
-                            <Fragment key={student.studentId}>
+            {loading ? (
+                <Spinner small={true} />
+            ) : (
+                <Fragment>
+                    <div className="alumni-list fc">
+                        <div className="border-bottom">
+                            <div className="border-top">
                                 <div className="alumni-list-item">
-                                    <h5>
-                                        {student.name} {student.surname}
-                                        <span>
-                                            {student.graduated}{' '}
-                                            {isAuthenticated ? (
-                                                <Fragment>
-                                                    <Link
-                                                        to={`/edit-alumni/${student.studentId}`}
-                                                    >
-                                                        Edit
-                                                    </Link>
-                                                    <button
-                                                        onClick={() => {
-                                                            deleteStudent(
-                                                                student.studentId
-                                                            );
-                                                        }}
-                                                    >
-                                                        Delete
-                                                    </button>
-                                                </Fragment>
-                                            ) : (
-                                                ''
-                                            )}
+                                    <h5 id="first-row">
+                                        Alumni{' '}
+                                        <span
+                                            id={
+                                                isAuthenticated
+                                                    ? 'graduated-mrg'
+                                                    : ''
+                                            }
+                                        >
+                                            Graduated date
                                         </span>
                                     </h5>
                                 </div>
-                            </Fragment>
-                        ))}
+                                {students.map((student) => (
+                                    <Fragment key={student.studentId}>
+                                        <div className="alumni-list-item">
+                                            <h5>
+                                                {student.name} {student.surname}
+                                                <span>
+                                                    {student.graduated}{' '}
+                                                    {isAuthenticated ? (
+                                                        <Fragment>
+                                                            <Link
+                                                                to={`/edit-alumni/${student.studentId}`}
+                                                            >
+                                                                Edit
+                                                            </Link>
+                                                            <button
+                                                                onClick={() => {
+                                                                    deleteStudent(
+                                                                        student.studentId
+                                                                    );
+                                                                }}
+                                                            >
+                                                                Delete
+                                                            </button>
+                                                        </Fragment>
+                                                    ) : (
+                                                        ''
+                                                    )}
+                                                </span>
+                                            </h5>
+                                        </div>
+                                    </Fragment>
+                                ))}
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
+                </Fragment>
+            )}
         </Fragment>
     );
 };

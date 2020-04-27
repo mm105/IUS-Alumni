@@ -14,6 +14,12 @@ export const LOGIN_FAIL = 'LOGIN_FAIL';
 export const LOGOUT = 'LOGOUT';
 export const ADMIN_LOADED = 'ADMIN_LOADED';
 export const AUTH_ERROR = 'AUTH_ERROR';
+export const CLEAR_AUTH = 'CLEAR_AUTH';
 
-//add alumni
+//? add alumni
+
 export const UPDATE_CITY_VALUE = 'UPDATE_CITY_VALUE';
+
+//alert
+export const SET_ALERT = 'SET_ALERT';
+export const REMOVE_ALERT = 'REMOVE_ALERT';

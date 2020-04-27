@@ -5,6 +5,7 @@ import {
     DELETE_STUDENT,
 } from './types';
 import axios from 'axios';
+import { setAlert } from './alert';
 
 //get students location
 export const getStudentsLocation = () => async (dispatch) => {
@@ -27,13 +28,13 @@ export const addAlumni = (data) => async (dispatch) => {
             Authorization: 'Bearer ' + localStorage.getItem('token'),
         },
     };
-    console.log(data);
 
     try {
         const res = await axios.post('/admin/add-student', data, config);
-        console.log(res);
+        dispatch(setAlert(res.data.message, 'success'));
     } catch (err) {
-        console.log(err);
+        console.log(err.response);
+        dispatch(setAlert(err.response.data.message, 'danger'));
     }
 };
 
@@ -46,9 +47,10 @@ export const editAlumni = (data) => async (dispatch) => {
     };
     try {
         const res = await axios.put('/admin/edit-student', data, config);
-        console.log(res);
+        dispatch(setAlert(res.data.message, 'success'));
     } catch (err) {
         console.log(err);
+        dispatch(setAlert(err.response.data.message, 'danger'));
     }
 };
 
@@ -72,14 +74,15 @@ export const deleteStudent = (studentId) => async (dispatch) => {
                 config
             );
 
-            console.log(res.data);
-
             dispatch({
                 type: DELETE_STUDENT,
                 payload: studentId,
             });
+            dispatch(setAlert(res.data.message, 'success'));
         } catch (err) {
             console.log(err.response);
+
+            dispatch(setAlert(err.response.data.message, 'danger'));
         }
     }
 };

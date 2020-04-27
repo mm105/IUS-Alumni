@@ -52,8 +52,6 @@ const AddAlumni = ({ isAuthenticated, addAlumni, clearStudents, loading }) => {
     };
 
     const onSelectedCity = (viewport, item) => {
-        console.log(item);
-
         const city = item.place_name.substr(0, item.place_name.indexOf(','));
         const country = item.place_name.substr(
             item.place_name.lastIndexOf(',') + 1

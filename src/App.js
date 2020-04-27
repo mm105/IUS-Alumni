@@ -18,6 +18,7 @@ import Navbar from './components/Navbar';
 import Login from './components/Login';
 import AlumniListAdmin from './components/AlumniListAdmin';
 import Settings from './components/Settings';
+import Alert from './components/Alert';
 
 //axios
 axios.defaults.baseURL =
@@ -32,7 +33,9 @@ if (localStorage.token) {
 
 function App() {
     useEffect(() => {
-        store.dispatch(loadAdmin());
+        if (localStorage.token) {
+            store.dispatch(loadAdmin());
+        }
     }, []);
 
     return (
@@ -40,6 +43,7 @@ function App() {
             <Router>
                 <Fragment>
                     <div className="page-container">
+                        <Alert />
                         <div className="content-wrap">
                             <Navbar />
 

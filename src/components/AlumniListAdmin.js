@@ -22,7 +22,7 @@ const AlumniListAdmin = ({
     return (
         <Fragment>
             {loading ? (
-                <Spinner />
+                <Spinner small={false} />
             ) : (
                 <Fragment>
                     <div className="list-wrap ">
