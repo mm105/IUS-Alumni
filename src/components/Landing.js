@@ -1,9 +1,13 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import MapTest from './MapTest';
+
 import { connect } from 'react-redux';
 
 import map_img from '../images/img2.png';
+
+//components
 import AlumniList from './AlumniList';
+import MapTest from './MapTest';
+import Map from './Map';
 
 const Landing = ({ isAuthenticated }) => {
     const nav = document.querySelector('nav');

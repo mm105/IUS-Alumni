@@ -17,7 +17,6 @@ export const AUTH_ERROR = 'AUTH_ERROR';
 export const CLEAR_AUTH = 'CLEAR_AUTH';
 
 //? add alumni
-
 export const UPDATE_CITY_VALUE = 'UPDATE_CITY_VALUE';
 
 //alert

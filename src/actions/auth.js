@@ -13,22 +13,23 @@ export const loadAdmin = () => async (dispatch) => {
     if (localStorage.token) {
         axios.defaults.headers.common['Authorization'] =
             'Bearer ' + localStorage.token;
-        try {
-            console.log('before');
-            const res = await axios.get('/admin/load');
-            console.log('after');
-
-            dispatch({
-                type: ADMIN_LOADED,
-                payload: res.data,
-            });
-        } catch (err) {
-            dispatch({
-                type: AUTH_ERROR,
-            });
-        }
     } else {
         delete axios.defaults.headers.common['Authorization'];
+    }
+
+    try {
+        console.log('before');
+        const res = await axios.get('/admin/load');
+        console.log('after');
+
+        dispatch({
+            type: ADMIN_LOADED,
+            payload: res.data,
+        });
+    } catch (err) {
+        dispatch({
+            type: AUTH_ERROR,
+        });
     }
 };
 
@@ -81,7 +82,7 @@ export const logout = () => (dispatch) => {
     }
 };
 
-//clear auth (reset loading to true)
+//!clear auth (reset loading to true)
 export const clearAuth = () => (dispatch) => {
     try {
         dispatch({

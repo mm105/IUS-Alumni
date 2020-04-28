@@ -13,7 +13,7 @@ body {
 }
 
 body {
-    overflow-x: hidden;
+    overflow-x: hidden !important;
     background: #fff;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
@@ -62,7 +62,7 @@ ul {
 .transition-to-footer {
     position: relative;
     height: 100px;
-    width: 110%;
+    width: 103%;
     background-color: #fff;
     transform: rotate(-1.5deg) translate(-30px, 30px);
     box-shadow: -12px 27px 24px -19px rgba(0, 0, 0, 0.28);
@@ -179,6 +179,65 @@ ul {
     margin-top: 50px;
     /* width: 80%;
     border-radius: 20px; */
+}
+
+.mapboxgl-popup-content {
+    border-radius: 15px;
+    /* min-height: 150px; */
+    max-width: 200px;
+    padding: 10px 15px;
+    letter-spacing: 1px;
+}
+
+#pop_name {
+    margin: 7px 0;
+    font-size: 17px;
+    color: #207ce5;
+}
+
+#pop_loc {
+    font-size: 14px;
+    color: #858383;
+    font-weight: 400;
+}
+
+#pop_des {
+    font-size: 15px;
+    margin: 5px 0;
+    color: #0b223d;
+    font-weight: 500;
+}
+
+#pop_grad {
+    font-size: 14px;
+    color: #0b223d;
+    margin: 3px 0;
+}
+
+.mapboxgl-popup-close-button {
+    top: 2px;
+    right: 7px;
+    font-size: 19px;
+    color: #b31919;
+    font-weight: 600;
+}
+
+.mapboxgl-popup-close-button:hover,
+.mapboxgl-popup-close-button:focus {
+    background-color: #fff;
+}
+
+.mapboxgl-map {
+    border-radius: 20px;
+    border: 1px solid #207ce5;
+}
+
+.mapboxgl-ctrl-bottom-left {
+    display: none;
+}
+
+.mapboxgl-ctrl-bottom-right {
+    display: none;
 }
 
 /* *NAVBAR */
@@ -327,7 +386,7 @@ ul {
 
 .transition {
     height: 300px;
-    width: 110%;
+    width: 103%;
     background-color: #fff;
     transform: rotate(-1.5deg) translateY(-30px) translateX(-30px);
     box-shadow: -5px -19px 27px -9px rgba(0, 0, 0, 0.24);

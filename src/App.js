@@ -33,9 +33,7 @@ if (localStorage.token) {
 
 function App() {
     useEffect(() => {
-        if (localStorage.token) {
-            store.dispatch(loadAdmin());
-        }
+        store.dispatch(loadAdmin());
     }, []);
 
     return (

@@ -13,15 +13,12 @@ import ItemComponent from './CitySearch/ItemComponent';
 import { useEffect } from 'react';
 import Spinner from './Spinner';
 
-const AddAlumni = ({ isAuthenticated, addAlumni, clearStudents, loading }) => {
+const AddAlumni = ({ addAlumni, clearStudents, loading }) => {
     useEffect(() => {
-        setload(false);
         return () => {
             clearStudents();
         };
     }, [clearStudents]);
-
-    const [load, setload] = useState(true);
 
     const [queryParams, setQueryParams] = useState({
         types: 'place',
@@ -98,7 +95,7 @@ const AddAlumni = ({ isAuthenticated, addAlumni, clearStudents, loading }) => {
     // }
     return (
         <Fragment>
-            {load ? (
+            {loading ? (
                 <Spinner />
             ) : (
                 <Fragment>
@@ -202,14 +199,12 @@ const AddAlumni = ({ isAuthenticated, addAlumni, clearStudents, loading }) => {
 };
 
 AddAlumni.propTypes = {
-    isAuthenticated: PropTypes.bool,
     addAlumni: PropTypes.func.isRequired,
     clearStudents: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-    isAuthenticated: state.auth.isAuthenticated,
-    loading: state.students.loading,
+    loading: state.auth.loading,
 });
 
 const mapDispatchToProps = {

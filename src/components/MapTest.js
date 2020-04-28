@@ -36,12 +36,12 @@ const MapTest = ({
     // });
 
     const [viewport, setViewport] = useState({
-        lng: 1,
-        lat: 1,
-        width: '1200px',
-        height: '600px',
-        zoom: 1,
-        minZoom: 1,
+        latitude: 20,
+        longitude: 10,
+        width: '80vw',
+        height: '80vh',
+        zoom: 1.5,
+        minZoom: 1.5,
     });
 
     const [selectedStudent, setSelectedStudent] = useState(null);
@@ -52,68 +52,69 @@ const MapTest = ({
                 <Spinner small={true} />
             ) : (
                 <Fragment>
-                    <div>
-                        <ReactMapGl
-                            {...viewport}
-                            mapboxApiAccessToken={
-                                process.env.REACT_APP_MAPBOX_KEY
-                            }
-                            mapStyle="mapbox://styles/mapbox/streets-v11"
-                            onViewportChange={(viewport) => {
-                                // const { width, height, ...etc } = viewport;
-                                setViewport(viewport);
-                            }}
-                        >
-                            {studentsLoc.map((student) => (
-                                <Marker
-                                    key={student.studentId}
-                                    latitude={student.coordinates[0]}
-                                    longitude={student.coordinates[1]}
-                                >
-                                    <button
-                                        className="marker-btn"
-                                        onClick={(e) => {
-                                            e.preventDefault();
-                                            getStudentInfo(student.studentId);
-                                            setSelectedStudent(true);
-                                        }}
-                                    >
-                                        <i className="fas fa-map-marker-alt"></i>
-                                    </button>
-                                </Marker>
-                            ))}
-                            {!infoLoading && selectedStudent ? (
-                                <Popup
-                                    latitude={
-                                        studentInfo.location.coordinates[0]
-                                    }
-                                    longitude={
-                                        studentInfo.location.coordinates[1]
-                                    }
-                                    onClose={() => {
-                                        setSelectedStudent(null);
-                                        clearStudentInfo();
+                    <ReactMapGl
+                        {...viewport}
+                        mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_KEY}
+                        mapStyle="mapbox://styles/mapbox/streets-v11"
+                        onViewportChange={(viewport) => {
+                            setViewport(viewport);
+                        }}
+                        onResize={() => {
+                            setViewport({
+                                ...viewport,
+                                width: '80vw',
+                                height: '80vh',
+                                // width: `${(2 * window.innerWidth) / 3}`,
+                                // height: `${(2 * window.innerHeight) / 3}`,
+                            });
+                        }}
+                    >
+                        {studentsLoc.map((student) => (
+                            <Marker
+                                key={student.studentId}
+                                latitude={student.coordinates[0]}
+                                longitude={student.coordinates[1]}
+                            >
+                                <button
+                                    className="marker-btn"
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        getStudentInfo(student.studentId);
+                                        setSelectedStudent(true);
                                     }}
-                                    className="popup"
                                 >
-                                    <div>
-                                        <h4>
-                                            {studentInfo.name}{' '}
-                                            {studentInfo.surname}{' '}
-                                        </h4>
-                                        <p>
-                                            City/Country:{' '}
-                                            {studentInfo.location.title}{' '}
-                                        </p>
-                                        <p>{studentInfo.description} </p>
-                                        <p>
-                                            Graduated: {studentInfo.graduated}{' '}
-                                        </p>
-                                    </div>
-                                </Popup>
-                            ) : null}
-                        </ReactMapGl>
-                    </div>
+                                    <i className="fas fa-map-marker-alt"></i>
+                                </button>
+                            </Marker>
+                        ))}
+                        {!infoLoading && selectedStudent ? (
+                            <Popup
+                                latitude={studentInfo.location.coordinates[0]}
+                                longitude={studentInfo.location.coordinates[1]}
+                                onClose={() => {
+                                    setSelectedStudent(null);
+                                    clearStudentInfo();
+                                }}
+
+                                // closeOnClick={true}
+                            >
+                                <div>
+                                    <h4 id="pop_name">
+                                        {studentInfo.name} {studentInfo.surname}{' '}
+                                    </h4>
+                                    <p id="pop_loc">
+                                        {studentInfo.location.title}{' '}
+                                    </p>
+                                    <p id="pop_des">
+                                        {studentInfo.description}{' '}
+                                    </p>
+                                    <p id="pop_grad">
+                                        Graduated: {studentInfo.graduated}{' '}
+                                    </p>
+                                </div>
+                            </Popup>
+                        ) : null}
+                    </ReactMapGl>
                 </Fragment>
             )}
         </Fragment>

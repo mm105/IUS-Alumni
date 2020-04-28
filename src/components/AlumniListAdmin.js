@@ -4,7 +4,7 @@ import Spinner from './Spinner';
 import { connect } from 'react-redux';
 
 //actions
-import { Link } from 'react-router-dom';
+
 import AlumniList from './AlumniList';
 import { getAllStudents, clearStudents } from '../actions/students';
 
@@ -35,7 +35,9 @@ const AlumniListAdmin = ({
     );
 };
 
-AlumniListAdmin.propTypes = {};
+AlumniListAdmin.propTypes = {
+    students: PropTypes.object.isRequired,
+};
 
 const mapStateToProps = (state) => ({
     students: state.students,

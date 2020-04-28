@@ -26,10 +26,7 @@ const Login = ({ auth, login }) => {
     const onSubmit = async (e) => {
         e.preventDefault();
         login(email, password);
-        setSpinner(true);
     };
-
-    const [spinner, setSpinner] = useState(false);
 
     //Redirect if logged in
     if (auth.isAuthenticated) {
