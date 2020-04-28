@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import ChangePassword from './ChangePassword';
 import Spinner from './Spinner';
+import Navbar from './Navbar';
 
 const Settings = ({ loading }) => {
     return (
@@ -11,6 +12,7 @@ const Settings = ({ loading }) => {
                 <Spinner small={false} />
             ) : (
                 <Fragment>
+                    <Navbar scrollActive={false} />
                     <div className="settings-wrap">
                         <h1 className="add-heading">Settings</h1>
                         <div className="settings fc">

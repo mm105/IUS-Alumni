@@ -4,36 +4,33 @@ import { Link, withRouter } from 'react-router-dom';
 import { logout } from '../actions/auth';
 import { useEffect } from 'react';
 
-const Navbar = ({ logout, isAuthenticated, location }) => {
+const Navbar = ({ logout, isAuthenticated, scrollActive }) => {
     // console.log(location);
 
     useEffect(() => {
         if (isAuthenticated) {
-            //* CHANGING NAVBAR STYLE
             const nav = document.querySelector('nav');
-            if (location.pathname !== '/' && nav !== null) {
-                nav.classList.add('scrolling-active');
-                // console.log('add in 1');
-            } else {
-                nav.classList.remove('scrolling-active');
-                // console.log('remove in 1');
-            }
-            window.addEventListener('scroll', () => {
-                if (nav !== null) {
-                    if (location.pathname === '/' && window.scrollY > 100) {
-                        nav.classList.add('scrolling-active');
-                        // console.log('add in 2');
-                    } else if (
-                        location.pathname === '/' &&
-                        window.scrollY <= 100
-                    ) {
-                        nav.classList.remove('scrolling-active');
-                        // console.log('remove in 2');
-                    }
+            if (nav !== null) {
+                if (scrollActive) {
+                    nav.classList.remove('scrolling-active');
+                    window.addEventListener('scroll', () => {
+                        if (nav !== null) {
+                            nav.classList.toggle(
+                                'scrolling-active',
+                                window.scrollY > 100
+                            );
+                        }
+                    });
+
+                    return () => {
+                        window.removeEventListener('scroll', () => {});
+                    };
+                } else {
+                    nav.classList.add('scrolling-active');
                 }
-            });
+            }
         }
-    }, [isAuthenticated, location.pathname]);
+    }, [isAuthenticated, scrollActive]);
     return (
         <Fragment>
             {isAuthenticated ? (

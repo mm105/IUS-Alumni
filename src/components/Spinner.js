@@ -10,7 +10,6 @@ const Spinner = ({ small }) => {
         if (!small) {
             if (nav !== null) {
                 nav.classList.add('hide-nav');
-                console.log('hh');
             }
 
             if (footer !== null) {
@@ -35,7 +34,7 @@ const Spinner = ({ small }) => {
                 }
             };
         }
-    }, [footer, content_wrap, nav]);
+    }, [footer, content_wrap, nav, small]);
     return (
         <Fragment>
             <div className={small ? 'fc spinner small' : 'fc spinner'}>

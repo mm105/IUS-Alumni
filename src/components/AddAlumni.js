@@ -1,5 +1,4 @@
 import React, { Fragment, useState } from 'react';
-import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
@@ -12,6 +11,7 @@ import InputComponent from './CitySearch/InputComponent';
 import ItemComponent from './CitySearch/ItemComponent';
 import { useEffect } from 'react';
 import Spinner from './Spinner';
+import Navbar from './Navbar';
 
 const AddAlumni = ({ addAlumni, clearStudents, loading }) => {
     useEffect(() => {
@@ -89,16 +89,13 @@ const AddAlumni = ({ addAlumni, clearStudents, loading }) => {
         }
     };
 
-    // // Redirect if not logged in
-    // if (!isAuthenticated) {
-    //     return <Redirect to="/login" />;
-    // }
     return (
         <Fragment>
             {loading ? (
                 <Spinner />
             ) : (
                 <Fragment>
+                    <Navbar scrollActive={false} />
                     <div className="fc add-wrap">
                         <h1 className="add-heading">Add Alumni</h1>
                         <div className="container fr">
@@ -150,7 +147,7 @@ const AddAlumni = ({ addAlumni, clearStudents, loading }) => {
                                         </div>
                                         <div className="alumni-form-group">
                                             <label htmlFor="graduated">
-                                                Graduate date
+                                                Graduation Year
                                             </label>
                                             <input
                                                 type="text"
@@ -158,7 +155,7 @@ const AddAlumni = ({ addAlumni, clearStudents, loading }) => {
                                                 id="graduated"
                                                 value={graduated}
                                                 onChange={(e) => onChange(e)}
-                                                placeholder="MM/YYYY"
+                                                placeholder="Year"
                                                 required
                                             />
                                             <label htmlFor="geocoder">

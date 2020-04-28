@@ -13,6 +13,7 @@ import { Link } from 'react-router-dom';
 
 const AlumniList = ({
     students: { students, loading },
+    auth,
     getAllStudents,
     clearStudents,
     isAuthenticated,
@@ -28,7 +29,7 @@ const AlumniList = ({
 
     return (
         <Fragment>
-            {loading ? (
+            {loading || students === undefined || auth.loading ? (
                 <Spinner small={true} />
             ) : (
                 <Fragment>
@@ -45,7 +46,7 @@ const AlumniList = ({
                                                     : ''
                                             }
                                         >
-                                            Graduated date
+                                            Graduation Year
                                         </span>
                                     </h5>
                                 </div>
@@ -99,6 +100,7 @@ AlumniList.propTypes = {
 const mapStateToProps = (state) => ({
     students: state.students,
     isAuthenticated: state.auth.isAuthenticated,
+    auth: state.auth,
 });
 
 const mapDispatchToProps = {

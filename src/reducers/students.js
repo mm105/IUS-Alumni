@@ -35,8 +35,8 @@ export default function (state = initialState, action) {
             };
         case CLEAR_STUDENTS:
             return {
-                students: [],
-                studentsLoc: [],
+                // students: [],
+                // studentsLoc: [],
                 loading: true,
             };
         default:

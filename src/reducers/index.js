@@ -4,6 +4,7 @@ import studentInfo from './studentInfo';
 import auth from './auth';
 import addAlumni from './addAlumni';
 import alert from './alert';
+import search from './search';
 
 export default combineReducers({
     students,
@@ -11,4 +12,5 @@ export default combineReducers({
     auth,
     addAlumni,
     alert,
+    search,
 });

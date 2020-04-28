@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Spinner from './Spinner';
 import { connect } from 'react-redux';
 
+import Navbar from './Navbar';
 //actions
 
 import AlumniList from './AlumniList';
@@ -25,6 +26,7 @@ const AlumniListAdmin = ({
                 <Spinner small={false} />
             ) : (
                 <Fragment>
+                    <Navbar scrollActive={false} />
                     <div className="list-wrap ">
                         <h1 className="add-heading">Alumni List</h1>
                         <AlumniList />

@@ -14,7 +14,6 @@ import Landing from './components/Landing';
 import Footer from './components/Footer';
 import AddAlumni from './components/AddAlumni';
 import EditAlumni from './components/EditAlumni';
-import Navbar from './components/Navbar';
 import Login from './components/Login';
 import AlumniListAdmin from './components/AlumniListAdmin';
 import Settings from './components/Settings';
@@ -43,8 +42,6 @@ function App() {
                     <div className="page-container">
                         <Alert />
                         <div className="content-wrap">
-                            <Navbar />
-
                             <Switch>
                                 <Route exact path="/" component={Landing} />
                                 <PrivateRoute

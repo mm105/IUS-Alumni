@@ -429,6 +429,26 @@ ul {
     box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.1);
 }
 
+.search-wrap {
+    position: relative;
+}
+
+.results {
+    position: absolute;
+    z-index: 10;
+    left: 50%;
+    margin-left: -180px;
+    margin-top: -11px;
+    border: 1px solid #0b223d;
+    border-top: none;
+    width: 360px;
+    background-color: #fff;
+    text-align: left;
+}
+
+.search-item {
+}
+
 .options {
     display: flex;
     color: #9b9b9b;
@@ -657,6 +677,7 @@ textarea:focus {
     color: #0b223d;
     /* color: #fff; */
     background-color: #b8d8f7;
+    cursor: pointer;
 }
 
 #inputCity {

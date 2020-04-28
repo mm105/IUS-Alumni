@@ -1,5 +1,4 @@
 import React, { Fragment, useState } from 'react';
-import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
@@ -13,12 +12,12 @@ import InputComponent from './CitySearch/InputComponent';
 import ItemComponent from './CitySearch/ItemComponent';
 import { useEffect } from 'react';
 import Spinner from './Spinner';
+import Navbar from './Navbar';
 
 const EditAlumni = ({
     //props
     match,
     history,
-    isAuthenticated,
     studentInfo: { studentInfo, infoLoading },
     //actions
     clearStudents,
@@ -68,7 +67,7 @@ const EditAlumni = ({
         },
     });
 
-    const { name, surname, description, graduated } = formData;
+    const { name, surname, description, graduated, location } = formData;
 
     const onChange = (e) => {
         setFormData({
@@ -100,16 +99,13 @@ const EditAlumni = ({
         history.push('/alumni-list');
     };
 
-    //Redirect if not logged in
-    // if (!isAuthenticated) {
-    //     return <Redirect to="/login" />;
-    // }
     return (
         <Fragment>
             {infoLoading ? (
                 <Spinner />
             ) : (
                 <Fragment>
+                    <Navbar scrollActive={false} />
                     <div className="fc add-wrap">
                         <h1 className="add-heading">Add Alumni</h1>
                         <div className="container fr">
@@ -161,7 +157,7 @@ const EditAlumni = ({
                                         </div>
                                         <div className="alumni-form-group">
                                             <label htmlFor="graduated">
-                                                Graduate date
+                                                Graduation Year
                                             </label>
                                             <input
                                                 type="text"
@@ -169,7 +165,7 @@ const EditAlumni = ({
                                                 id="graduated"
                                                 value={graduated}
                                                 onChange={(e) => onChange(e)}
-                                                placeholder="MM/YYYY"
+                                                placeholder="Year"
                                                 required
                                             />
                                             <label htmlFor="geocoder">
@@ -186,6 +182,9 @@ const EditAlumni = ({
                                                 updateInputOnSelect={true}
                                                 onSelected={onSelectedCity}
                                                 queryParams={queryParams}
+                                                initialInputValue={
+                                                    location.title
+                                                }
                                                 timeout={100}
                                                 limit={4}
                                                 id="gecoder"

@@ -1,10 +1,9 @@
 import React, { Fragment, useState } from 'react';
-import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { changePassword } from '../actions/auth';
 
-const ChangePassword = ({ changePassword, isAuthenticated }) => {
+const ChangePassword = ({ changePassword }) => {
     const [formData, setFormData] = useState({
         password: '',
         newPassword: '',
@@ -26,11 +25,6 @@ const ChangePassword = ({ changePassword, isAuthenticated }) => {
             newPasswordConfirm: '',
         });
     };
-
-    // //Redirect if not logged in
-    // if (!isAuthenticated) {
-    //     return <Redirect to="/login" />;
-    // }
 
     return (
         <Fragment>
@@ -84,8 +78,6 @@ ChangePassword.propTypes = {
     changePassword: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-    isAuthenticated: state.auth.isAuthenticated,
-});
+const mapStateToProps = (state) => ({});
 
 export default connect(mapStateToProps, { changePassword })(ChangePassword);

@@ -18,9 +18,7 @@ export const loadAdmin = () => async (dispatch) => {
     }
 
     try {
-        console.log('before');
         const res = await axios.get('/admin/load');
-        console.log('after');
 
         dispatch({
             type: ADMIN_LOADED,

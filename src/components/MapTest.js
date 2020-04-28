@@ -23,18 +23,6 @@ const MapTest = ({
         };
     }, [getStudentsLocation, clearStudentInfo, clearStudents]);
 
-    // useEffect(() => {
-    //     setdimensions({
-    //         width: `${(2 * window.innerWidth) / 3}`,
-    //         height: `${(2 * window.innerHeight) / 3}`,
-    //     });
-    // }, []);
-
-    // const [dimensions, setdimensions] = useState({
-    //     width: `${(2 * window.innerWidth) / 3}`,
-    //     height: `${(2 * window.innerHeight) / 3}`,
-    // });
-
     const [viewport, setViewport] = useState({
         latitude: 20,
         longitude: 10,
@@ -48,7 +36,7 @@ const MapTest = ({
 
     return (
         <Fragment>
-            {loading ? (
+            {loading || studentsLoc === undefined ? (
                 <Spinner small={true} />
             ) : (
                 <Fragment>
